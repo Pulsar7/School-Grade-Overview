@@ -8,4 +8,4 @@ Fach,Schulaufgaben,Kurzarbeiten,Mündlich
 
 # Requirements
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
