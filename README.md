@@ -6,3 +6,6 @@ Try it out.
 
 Fach,Schulaufgaben,Kurzarbeiten,Mündlich
 
+# Requirements
+
+pip install -r requirements.txt
