@@ -4,7 +4,7 @@ Pulsar
 02.02.2022
 > Python-Version: 3.8.2
 """
-import sys,os,math,csv
+import sys,os,math,csv,platform
 import pandas as pd
 sys.dont_write_bytecode = True
 from __modules__ import printout
@@ -187,7 +187,10 @@ class VISUALISATION:
             self.p.failed(),self.p.error(error)
 
 #
-os.system("clear") #Linux
+if (platform.system() == 'Windows'):
+    os.system("cls")
+else:
+    os.system("clear")
 p = printout.PRINTOUT()
 if (len(sys.argv) < 2):
     p.error("Not enough arguments!")
