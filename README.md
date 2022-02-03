@@ -9,6 +9,18 @@ The data, which you have to insert in the csv-file is seperated with these argum
 
 > Fach,Schulaufgaben,Kurzarbeiten,Mündlich
 
+__Here is an example:__
+    
+    > Mathematik,[10;9],[7;9];[5;]
+    
+1. The subject-name is: *Mathematik*
+2. The '*Schulaufgaben*'-grades are: 10 (Points) and 9 (Points)
+3. The '*Kurzarbeiten*'-grades are: 7 (Points) and 9 (Points)
+4. The '*Mündlich*'-grades are: 5 (Points) and None (Points)
+
+__When you let something empty (like this: [5;] or [;]) it means, that it exists only one grade or none.__
+
+
 # Requirements
 
     pip install -r requirements.txt
