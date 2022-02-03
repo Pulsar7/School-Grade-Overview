@@ -1,7 +1,7 @@
 """
 Notenübersicht <FOS/BOS>
 Pulsar
-02.02.2022
+03.02.2022
 > Python-Version: 3.8.2
 """
 import sys,os,math,csv,platform
@@ -72,8 +72,7 @@ class VISUALISATION:
                         self.get_grades_data(fach,
                             args_string=mu_string,
                             grade_type="mündlich"
-                        )
-                    
+                        )          
             if (self.data['anzahl_noten_insgesamt'] == 0):
                 self.status = False
                 self.p.yes_but_actually_no("0 grades")
@@ -100,6 +99,7 @@ class VISUALISATION:
         self.p.info("Closed")
 
     def check_under_pointed(self):
+        underpointed_subjects = {}
         self.p.load("Check for under-pointed subjects...")
         state = True
         for fach in self.data['fächer']:
@@ -107,17 +107,24 @@ class VISUALISATION:
                 r_grade_average = self.data['fächer'][fach]['grade_average_rounded']
                 if (r_grade_average != None):
                     if (r_grade_average < 5):
-                        self.p.underpointed_warning(
-                            fach,
-                            "WARNING!",
-                            r_grade_average
-                        )
+                        underpointed_subjects[fach] = r_grade_average
             except Exception as error:
                 self.p.failed(),self.p.error(error)
                 state = False
                 break
         if (state == True):
-            self.p.no_under_pointed()
+            if (len(underpointed_subjects) == 0):
+                self.p.no_under_pointed()
+            else:
+                self.p.found_underpointed(len(underpointed_subjects))
+                for subject in underpointed_subjects:
+                    self.p.underpointed_warning(
+                        subject,
+                        "WARNING!",
+                        underpointed_subjects[subject]
+                    )
+        else:
+            self.p.failed()
             
     def print_all_data(self):
         self.p.view("Grade average from subjects")
@@ -147,18 +154,18 @@ class VISUALISATION:
             self.p.load("Calculate average grade of '{}'...".format(fach))
             try:
                 (grade_counter,overall_number) = (0,0)
-                #Schulaufgaben
-                for schulaufgabe in self.data['fächer'][fach]['schulaufgaben']:
-                    overall_number += schulaufgabe*2
-                    grade_counter += 2
                 #Kurzarbeiten
                 for kurzarbeit in self.data['fächer'][fach]['kurzarbeiten']:
                     overall_number += kurzarbeit*2
                     grade_counter += 2
                 #Mündlich
                 for muendlich in self.data['fächer'][fach]['mündlich']:
-                    overall_number += muendlich*1
+                    overall_number += muendlich*0.5
                     grade_counter += 1
+                #Schulaufgaben
+                for schulaufgabe in self.data['fächer'][fach]['schulaufgaben']:
+                    overall_number += schulaufgabe*2
+                    grade_counter += 2
                 grade_average = (overall_number/grade_counter)
                 self.data['fächer'][fach]['grade_average'] = grade_average
                 self.data['fächer'][fach]['grade_average_rounded'] = round(
@@ -187,11 +194,12 @@ class VISUALISATION:
             self.p.failed(),self.p.error(error)
 
 #
-if (platform.system() == 'Windows'):
+if (platform.system() == "Windows"):
     os.system("cls")
 else:
     os.system("clear")
 p = printout.PRINTOUT()
+p.info("OS: %s"%(platform.system()))
 if (len(sys.argv) < 2):
     p.error("Not enough arguments!")
     p.info("Syntax: python(3) [app].py [CSV-File-Path]")
