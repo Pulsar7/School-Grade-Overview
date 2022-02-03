@@ -84,3 +84,8 @@ class PRINTOUT:
         sys.stdout.write(
             self.green+"O.K. (nothing found)"+self.reset_all+"\n"
         )
+
+    def found_underpointed(self,number):
+        sys.stdout.write(
+            self.red+"FOUND %s"%(number)+self.reset_all+"\n"
+        )
