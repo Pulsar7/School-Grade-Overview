@@ -34,4 +34,4 @@ __When you let something empty `(like this: [5;] or [;])`  it means, that it exi
 
 > Pulsar \
 > Twitter: https://twitter.com/SevenPulsar \
-> StackOverflow: https://stackoverflow.com/users/13998100/pulsar \
+> StackOverflow: https://stackoverflow.com/users/13998100/pulsar
