@@ -11,7 +11,7 @@ The data, which you have to insert in the csv-file is seperated with these argum
 
 __Here is an example:__
     
-      `Mathematik,[10;9],[7;9];[5;]`
+    Mathematik,[10;9],[7;9];[5;]
     
 1. The subject-name is: *Mathematik*
 2. The '*Schulaufgaben*'-grades are: 10 (Points) and 9 (Points)
