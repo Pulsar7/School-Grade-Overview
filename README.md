@@ -3,6 +3,12 @@
 A python-script is reading the csv file and calculates the grade average of each school subject. It also calculates the overall grade average.
 At the end the programm will display the school grades and the calculated data.
 
+# Author
+
+> Pulsar \
+> Twitter: https://twitter.com/SevenPulsar \
+> StackOverflow: https://stackoverflow.com/users/13998100/pulsar
+
 # Explanation
 
 The data, which you have to insert in the csv-file is seperated with these arguments:
@@ -29,9 +35,3 @@ __When you let something empty `(like this: [5;] or [;])`  it means, that it exi
 # Executing
 
     python3 [app_name].py [csv-file-path]
-    
-# Author
-
-> Pulsar \
-> Twitter: https://twitter.com/SevenPulsar \
-> StackOverflow: https://stackoverflow.com/users/13998100/pulsar
