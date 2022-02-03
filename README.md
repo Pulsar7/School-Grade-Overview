@@ -5,7 +5,9 @@ At the end the programm will display the school grades and the calculated data.
 
 # CSV-File
 
-Fach,Schulaufgaben,Kurzarbeiten,Mündlich
+The data, which you have to insert in the csv-file is seperated with these arguments:
+
+> Fach,Schulaufgaben,Kurzarbeiten,Mündlich
 
 # Requirements
 
