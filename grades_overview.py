@@ -160,7 +160,7 @@ class VISUALISATION:
                     grade_counter += 2
                 #Mündlich
                 for muendlich in self.data['fächer'][fach]['mündlich']:
-                    overall_number += muendlich*0.5
+                    overall_number += muendlich*1
                     grade_counter += 1
                 #Schulaufgaben
                 for schulaufgabe in self.data['fächer'][fach]['schulaufgaben']:
