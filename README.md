@@ -29,3 +29,9 @@ __When you let something empty `(like this: [5;] or [;])`  it means, that it exi
 # Executing
 
     python3 [app_name].py [csv-file-path]
+    
+# Author
+
+> Pulsar
+> Twitter: https://twitter.com/SevenPulsar
+> StackOverflow: https://stackoverflow.com/users/13998100/pulsar
