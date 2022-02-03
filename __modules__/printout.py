@@ -77,7 +77,7 @@ class PRINTOUT:
 
     def underpointed_warning(self,subject,msg,rounded_grade):
         sys.stdout.write(
-            self.begin+self.white+"["+self.red+"%s"%(subject)+self.white+"]: "+self.red+"%s=> %s"%(rounded_grade,msg)+self.reset_all+"\n"
+            self.begin+self.white+"["+self.red+"%s"%(subject)+self.white+"]: "+self.red+"%s => %s"%(rounded_grade,msg)+self.reset_all+"\n"
         )
 
     def no_under_pointed(self):
