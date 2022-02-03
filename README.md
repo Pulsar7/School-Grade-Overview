@@ -24,3 +24,8 @@ __When you let something empty `(like this: [5;] or [;])`  it means, that it exi
 # Requirements
 
     pip install -r requirements.txt
+
+
+# Executing
+
+    python3 [app_name].py [csv-file-path]
