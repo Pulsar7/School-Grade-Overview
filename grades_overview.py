@@ -4,6 +4,10 @@ Pulsar
 03.02.2022
 > Python-Version: 3.8.2
 """
+"""
+Notenübersicht <FOS/BOS>
+Benedikt Fichtner
+"""
 import sys,os,math,csv,platform
 import pandas as pd
 sys.dont_write_bytecode = True
@@ -95,6 +99,7 @@ class VISUALISATION:
                 self.check_under_pointed()
                 self.print_all_data()
         else:
+            self.p.failed()
             self.p.error("No data")
         self.p.info("Closed")
 
@@ -144,8 +149,7 @@ class VISUALISATION:
         subjects_data = self.data['fächer']
         for fach in self.data['fächer']:
             del subjects_data[fach]['grade_average']
-        df = pd.DataFrame(self.data['fächer'])   
-        df.style.background_gradient(cmap="Reds")     
+        df = pd.DataFrame(self.data['fächer'])     
         print(df)
         print("")
 
