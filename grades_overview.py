@@ -4,10 +4,6 @@ Pulsar
 03.02.2022
 > Python-Version: 3.8.2
 """
-"""
-Notenübersicht <FOS/BOS>
-Benedikt Fichtner
-"""
 import sys,os,math,csv,platform
 import pandas as pd
 sys.dont_write_bytecode = True
