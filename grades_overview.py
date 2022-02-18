@@ -1,12 +1,8 @@
 """
 Notenübersicht <FOS/BOS>
 Pulsar
-03.02.2022
+18.02.2022
 > Python-Version: 3.8.2
-"""
-"""
-Notenübersicht <FOS/BOS>
-Benedikt Fichtner
 """
 import sys,os,math,csv,platform
 from cv2 import edgePreservingFilter
