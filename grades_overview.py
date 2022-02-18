@@ -4,7 +4,12 @@ Pulsar
 03.02.2022
 > Python-Version: 3.8.2
 """
+"""
+Notenübersicht <FOS/BOS>
+Benedikt Fichtner
+"""
 import sys,os,math,csv,platform
+from cv2 import edgePreservingFilter
 import pandas as pd
 sys.dont_write_bytecode = True
 from __modules__ import printout
@@ -20,7 +25,7 @@ class VISUALISATION:
             "overall_grade_average": "None",
             "overall_grade_average_rounded": "None"
         }
-    
+
     def get_grades_data(self,fach,args_string,grade_type):
         if ("[" in args_string and "]" in args_string):
             argumente_a = args_string.split('[')
@@ -72,7 +77,7 @@ class VISUALISATION:
                         self.get_grades_data(fach,
                             args_string=mu_string,
                             grade_type="mündlich"
-                        )          
+                        )
             if (self.data['anzahl_noten_insgesamt'] == 0):
                 self.status = False
                 self.p.yes_but_actually_no("0 grades")
@@ -88,7 +93,7 @@ class VISUALISATION:
                 self.data['anzahl_noten_insgesamt']
             ))
             if (self.data['anzahl_noten_insgesamt'] < 3):
-                self.p.warning("Too little data available")
+                self.p.warning("Not enough data available!")
             else:
                 self.calculate_average_grade()
                 self.calculate_overall_grade_average()
@@ -107,7 +112,7 @@ class VISUALISATION:
             try:
                 r_grade_average = self.data['fächer'][fach]['grade_average_rounded']
                 if (r_grade_average != None):
-                    if (r_grade_average < 5):
+                    if (r_grade_average < 4):
                         underpointed_subjects[fach] = r_grade_average
             except Exception as error:
                 self.p.failed(),self.p.error(error)
@@ -126,7 +131,7 @@ class VISUALISATION:
                     )
         else:
             self.p.failed()
-            
+
     def print_all_data(self):
         self.p.view("Grade average from subjects")
         for fach in self.data['fächer']:
@@ -145,7 +150,7 @@ class VISUALISATION:
         subjects_data = self.data['fächer']
         for fach in self.data['fächer']:
             del subjects_data[fach]['grade_average']
-        df = pd.DataFrame(self.data['fächer'])     
+        df = pd.DataFrame(self.data['fächer'])
         print(df)
         print("")
 
@@ -153,20 +158,29 @@ class VISUALISATION:
         for fach in self.data['fächer']:
             self.p.load("Calculate average grade of '{}'...".format(fach))
             try:
-                (grade_counter,overall_number) = (0,0)
+                (
+                    grade_average,ka_counter,ka_summ,mu_counter,
+                    mu_summ,sa_counter,sa_summ,ka_mu_grade_average
+                ) = (
+                    0,0,0,0,0,0,0,0
+                )
                 #Kurzarbeiten
                 for kurzarbeit in self.data['fächer'][fach]['kurzarbeiten']:
-                    overall_number += kurzarbeit*2
-                    grade_counter += 2
+                    ka_counter += 2
+                    ka_summ += (kurzarbeit*2)
                 #Mündlich
-                for muendlich in self.data['fächer'][fach]['mündlich']:
-                    overall_number += muendlich*1
-                    grade_counter += 1
+                for mündlich in self.data['fächer'][fach]['mündlich']:
+                    mu_counter += 1
+                    mu_summ += mündlich
+                ka_mu_grade_average = ((ka_summ+mu_summ)/(ka_counter+mu_counter))
                 #Schulaufgaben
                 for schulaufgabe in self.data['fächer'][fach]['schulaufgaben']:
-                    overall_number += schulaufgabe*2
-                    grade_counter += 2
-                grade_average = (overall_number/grade_counter)
+                    sa_counter += 1
+                    sa_summ += schulaufgabe
+                if (ka_summ != 0 and mu_summ != 0 and sa_summ != 0):
+                    grade_average = ((ka_mu_grade_average+sa_summ)/(2))
+                else:
+                    grade_average = ka_mu_grade_average
                 self.data['fächer'][fach]['grade_average'] = grade_average
                 self.data['fächer'][fach]['grade_average_rounded'] = round(
                     grade_average
